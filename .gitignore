@@ -1,0 +1,21 @@
+# Ignorar todo el contenido de datasets
+utils/datasets/*
+!utils/datasets/.gitkeep
+# Ignorar los resultados
+results/*
+!results/.gitkeep
+# Ignorar los modelos
+utils/modelos/*
+!utils/modelos/.gitkeep
+# Entornos virtuales
+venv/
+.venv/
+# Python
+__pycache__/
+*.pyc
+# Modelos
+*.pkl
+*.joblib
+# Variables de entorno
+.env
+ 

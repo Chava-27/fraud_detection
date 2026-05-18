@@ -1,0 +1,202 @@
+# ============================================================
+# CONFIGURACIÓN CENTRAL — Detección de Fraude Financiero
+# ============================================================
+# Cambia enabled: false para excluir algo sin borrar su config.
+#
+# MODOS DE EJECUCIÓN:
+#   offline  → solo local, sin internet, sin Drive
+#   online   → sube a Google Drive → genera notebook → abre Colab
+#   preguntar→ pregunta en terminal qué modo usar
+# ============================================================
+
+general:
+  random_state: 42
+  test_size: 0.20
+  cv_folds: 5
+  refit_metric: "recall"
+  n_jobs: -1
+  modo: "offline"
+  guardar_modelos: true
+  carpeta_datasets: "utils/datasets"
+  carpeta_modelos: "utils/modelos"
+  carpeta_resultados: "results"
+
+# ============================================================
+# GPU
+# ============================================================
+gpu:
+  enabled: true
+  forzar_cpu: false
+
+# ============================================================
+# GOOGLE DRIVE
+# ============================================================
+drive:
+  cuenta_principal: "pv230120061@vallarta.tecmm.edu.mx"
+  # cuenta_secundaria: "salvador16117v@gmail.com"
+  carpeta_drive: "fraud_detection_ml"
+  nombre_zip: "fraud_detection.zip"
+  ruta_manual: "H:/Mi unidad"
+  #ruta_manual: "G:/Mi unidad"
+
+# ============================================================
+# GOOGLE COLAB
+# ============================================================
+colab:
+  enabled: false
+  nombre_notebook: "fraud_detection_colab.ipynb"
+  carpeta_drive_colab: "fraud_detection_ml"
+  python_version: "3.10"
+  instalar_rapids: false
+  abrir_navegador: true
+
+# ============================================================
+# DATASETS
+# ============================================================
+datasets:
+  # Descarga: https://www.kaggle.com/datasets/mlg-ulb/creditcardfraud
+  - nombre: "CreditCard Fraud (OpenML)"
+    enabled: true
+    fuente: "openml"
+    openml_name: "creditcard"
+    openml_version: 1
+    archivo_local: "creditcard.csv"
+    target_col: "Class"
+    fraud_value: 1
+    sample_frac: 1.0
+
+  # Descarga: https://www.kaggle.com/datasets/ealaxi/banksim1
+  # Archivo:bs140513_032310.csv → renombrar a banksim.csv
+  - nombre: "BankSim (Kaggle)"
+    enabled: true
+    fuente: "csv_local"
+    archivo_local: "banksim.csv"
+    target_col: "fraud"
+    fraud_value: 1
+    sample_frac: 1.0
+
+  - nombre: "Dataset Local CSV"
+    enabled: false
+    fuente: "csv_local"
+    archivo_local: "mi_dataset.csv"
+    target_col: "Class"
+    fraud_value: 1
+    sample_frac: 1.0
+
+  # Descarga: https://www.kaggle.com/datasets/ealaxi/paysim1
+  # Archivo: PS_20174392719_1491204439457_log.csv → renombrar a paysim.csv
+  - nombre: "PaySim (Kaggle)"
+    enabled: true
+    fuente: "csv_local"
+    archivo_local: "paysim.csv"
+    target_col: "isFraud"
+    fraud_value: 1
+    sample_frac: 0.30
+
+  # Descarga: https://www.kaggle.com/competitions/ieee-fraud-detection/data
+  # Requiere combinar transaction + identity con utils/ieee_merge.py
+  - nombre: "IEEE-CIS Fraud Detection"
+    enabled: false
+    fuente: "csv_local"
+    archivo_local: "ieee_cis.csv"
+    target_col: "isFraud"
+    fraud_value: 1
+    sample_frac: 1.0
+
+  # Descarga: https://www.kaggle.com/datasets/deepeshkansotia/banking-fraud-detection-and-risk-analytics-dataset
+  - nombre: "Banking Fraud Risk Analytics (Kaggle)"
+    enabled: true
+    fuente: "csv_local"
+    archivo_local: "banking_transactions.csv"
+    target_col: "fraud_flag"
+    fraud_value: true
+    sample_frac: 1.0
+
+  # Descarga : https://www.kaggle.com/datasets/belbino/indian-banking-transactions-20192024
+  - nombre: "Indian Banking Transactions 2019-2024 (Kaggle)"
+    enabled: true
+    fuente: "csv_local"
+    archivo_local: "indian_banking_transactions.csv"
+    target_col: "is_fraud"
+    fraud_value: 1
+    sample_frac: 1.0
+
+# ============================================================
+# MODELOS
+# ============================================================
+modelos:
+  - nombre: "Logistic Regression"
+    enabled: true
+    clase: "LogisticRegression"
+    usa_scaler: true
+    gpu_support: false
+    params_fijos:
+      max_iter: 2000
+      class_weight: "balanced"
+    grid:
+      model__C: [0.01, 0.1, 1, 10]
+      model__solver: ["liblinear"]
+
+  - nombre: "Decision Tree"
+    enabled: true
+    clase: "DecisionTreeClassifier"
+    usa_scaler: false
+    gpu_support: false
+    params_fijos:
+      class_weight: "balanced"
+    grid:
+      model__max_depth: [3, 5, 8, 12]
+      model__min_samples_split: [2, 10, 20]
+      model__min_samples_leaf: [1, 5, 10]
+
+  - nombre: "Random Forest"
+    enabled: true
+    clase: "RandomForestClassifier"
+    usa_scaler: false
+    gpu_support: false
+    params_fijos:
+      class_weight: "balanced"
+      n_jobs: -1
+    grid:
+      model__n_estimators: [100, 200]
+      model__max_depth: [8, 12]
+      model__min_samples_split: [2, 10]
+      model__min_samples_leaf: [1, 5]
+      model__max_features: ["sqrt", "log2"]
+
+  - nombre: "SVM"
+    enabled: false
+    clase: "SVC"
+    usa_scaler: true
+    gpu_support: false
+    params_fijos:
+      class_weight: "balanced"
+      probability: false
+    grid:
+      model__C: [0.1, 1, 10]
+      model__kernel: ["rbf", "linear"]
+
+  - nombre: "XGBoost"
+    enabled: false
+    clase: "XGBClassifier"
+    usa_scaler: false
+    gpu_support: true
+    params_fijos:
+      eval_metric: "logloss"
+      verbosity: 0
+      n_jobs: -1
+    grid:
+      model__n_estimators: [100, 200]
+      model__max_depth: [4, 6, 8]
+      model__learning_rate: [0.05, 0.1]
+      model__subsample: [0.8, 1.0]
+
+# ============================================================
+# CONCLUSIÓN IA
+# ============================================================
+conclusion_ia:
+  enabled: true
+  motor: "anthropic_api"
+  modelo_api: "claude-sonnet-4-20250514"
+  max_tokens: 600
+  idioma: "español"
