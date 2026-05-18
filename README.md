@@ -1,23 +1,3 @@
-
-Gemini
-Nueva conversación
-Buscar conversaciones
-Biblioteca
-Nuevo cuaderno
-Corrección de Código Markdown Duplicado
-Refactorización a Arquitectura Multicapa
-Control de Carrito con ESP32 y DRV8833
-Inductive Research: Generación Carga Docente
-Optimización y Simplificación de Código
-Detección de Traslapes de Horario
-Atajos para Comentar Bloques de Código
-Corregir y Unificar Código
-Refactorizar SQL en VB.NET
-Conversación con Gemini
-dame el codigo markdon ya corregido, pues hay cosas reptidas
-
-
-
 # 🔍 Detección de Fraude Financiero con Machine Learning
 
 
