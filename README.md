@@ -126,7 +126,7 @@ O descarga manualmente (ver tabla siguiente) y coloca los CSVs en utils/datasets
 ## Datasets disponibles
 
 |Dataset|Filas| % Fraude| Fuente| Archivo esperado|
-|:---:|:---:|:---:||:---:||:---:|
+|:---:|:---:|:---:|:---:||:---:|
 |CreditCardFraud| 284,807 | 0.17% |OpenML/Kaggle| creditcard.csv|
 |BankSim |594,643| 1.20%| Kaggle| banksim.csv|
 |PaySim |6,362,620 |0.13% |Kaggle |paysim.csv (usa sample_frac:0.3)|
