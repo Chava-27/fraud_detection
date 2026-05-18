@@ -331,4 +331,4 @@ python -c "import pandas as pd; print(pd.read_csv('utils/datasets/mi_archivo.csv
 
 ## 📜 Licencia
 
-Proyecto académico — Tecnológico Superior de Jalisco · 2026
+Este proyecto se distribuye bajo la licencia MIT.
