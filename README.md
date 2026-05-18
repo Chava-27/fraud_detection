@@ -125,14 +125,14 @@ O descarga manualmente (ver tabla siguiente) y coloca los CSVs en utils/datasets
 
 ## Datasets disponibles
 
-|Dataset|Filas| % Fraude| Fuente| Archivo esperado|
-|:---:|:---:|:---:|:---:||:---:|
-|CreditCardFraud| 284,807 | 0.17% |OpenML/Kaggle| creditcard.csv|
-|BankSim |594,643| 1.20%| Kaggle| banksim.csv|
-|PaySim |6,362,620 |0.13% |Kaggle |paysim.csv (usa sample_frac:0.3)|
-|Banking Fraud Risk Analytics |10,000 |12.51%| Kaggle |banking_transactions.csv|
-|Indian Banking Transactions |550,000 |0.89% |Kaggle |indian_banking_transactions.csv|
-|IEEE-CIS Fraud Detection| 590,540| 3.50% |Kaggle competition |ieee_cis.csv¹|
+| Dataset | Filas | % Fraude | Fuente | Archivo esperado |
+|:---:|:---:|:---:|:---:|:---:|
+| CreditCard Fraud | 284,807 | 0.17% | OpenML/Kaggle | `creditcard.csv` |
+| BankSim | 594,643 | 1.20% | Kaggle | `banksim.csv` |
+| PaySim | 6,362,620 | 0.13% | Kaggle | `paysim.csv` (usa `sample_frac:0.3`) |
+| Banking Fraud Risk Analytics | 10,000 | 12.51% | Kaggle | `banking_transactions.csv` |
+| Indian Banking Transactions | 550,000 | 0.89% | Kaggle | `indian_banking_transactions.csv` |
+| IEEE-CIS Fraud Detection | 590,540 | 3.50% | Kaggle competition | `ieee_cis.csv`¹ |
 
 ¹ Ejecuta python utils/ieee_merge.py para fusionar train_transaction.csv y train_identity.csv.
 
